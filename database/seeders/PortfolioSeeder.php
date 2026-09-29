@@ -88,7 +88,7 @@ class PortfolioSeeder extends Seeder
                 . 'front-end, automação de testes e inteligência artificial. Hoje contribuo em projetos '
                 . 'reais com Angular, Laravel, MySQL e Python, trabalhando em equipe com Scrum e Kanban. '
                 . 'Estou em busca da minha primeira oportunidade como desenvolvedora.',
-            'foto_url' => null,
+            'foto_url' => '/foto.jpeg',
             'cta_primario_label' => 'Baixar currículo',
             'cta_primario_url' => '/curriculo.pdf',
             'cta_secundario_label' => 'Falar no WhatsApp',
