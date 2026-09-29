@@ -275,7 +275,7 @@ class PortfolioSeeder extends Seeder
             ['chave' => 'whatsapp',      'grupo' => 'redes', 'rotulo' => 'WhatsApp (so numeros, com DDD)', 'valor' => '61991572752'],
             ['chave' => 'linkedin_url',  'grupo' => 'redes', 'rotulo' => 'LinkedIn',  'valor' => 'https://www.linkedin.com/in/claudia-marques-87873a247/'],
             ['chave' => 'github_url',    'grupo' => 'redes', 'rotulo' => 'GitHub',    'valor' => 'https://github.com/marceline-mrq'],
-            ['chave' => 'instagram_url', 'grupo' => 'redes', 'rotulo' => 'Instagram', 'valor' => ''],
+            ['chave' => 'instagram_url', 'grupo' => 'redes', 'rotulo' => 'Instagram', 'valor' => 'https://www.instagram.com/clamarques___1'],
             // seo
             ['chave' => 'seo_titulo',    'grupo' => 'seo', 'rotulo' => 'Titulo da pagina', 'valor' => 'Claudia Marques da Silva - Desenvolvedora front-end'],
             ['chave' => 'seo_descricao', 'grupo' => 'seo', 'rotulo' => 'Descricao (meta description)', 'valor' => 'Desenvolvedora front-end em transição da radiologia para a tecnologia. Angular, Laravel, React e testes com Cypress. Veja meus projetos.'],
