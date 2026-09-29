@@ -1,0 +1,95 @@
+// ===========================================================================
+// TOKENS — a cara do site mora aqui
+// ===========================================================================
+// Regra do projeto: NENHUM outro arquivo escreve cor, fonte ou espacamento
+// na mao. Sempre var(--nome). Quem quiser mudar o visual do site inteiro
+// muda aqui, num lugar so, e nada mais quebra.
+//
+// Para trocar a paleta: mexa nos valores de :root. Nao saia caçando #hex
+// espalhado pelos componentes, porque nao existe nenhum.
+// ===========================================================================
+
+:root {
+  // --- Cor -----------------------------------------------------------------
+  // Papel quente em vez de branco puro: cansa menos o olho e parece mais
+  // caro. Tinta quase preta em vez de #000: preto absoluto vibra na tela.
+  --papel: #faf9f7;
+  --papel-2: #f1efea;   // fundo das bandas alternadas
+  --papel-3: #e6e2db;   // bordas e linhas
+  --tinta: #17171c;
+  --tinta-2: #5c5c68;   // texto secundario
+  --tinta-3: #8b8b96;   // legenda, metadado
+
+  // Um unico destaque. Verde profundo: sobrio, nada de azul de template.
+  --destaque: #1f6f63;
+  --destaque-escuro: #165249;
+  --destaque-suave: #e7f1ef;
+
+  // Cor por area da trajetoria: a migracao de carreira fica visivel na tela
+  --area-saude: #7b5ea7;
+  --area-tecnologia: var(--destaque);
+
+  --erro: #b3261e;
+  --erro-suave: #fdeceb;
+  --sucesso: #1f6f63;
+
+  // --- Tipografia ----------------------------------------------------------
+  --fonte-titulo: 'Sora', system-ui, sans-serif;
+  --fonte-texto: 'Inter', system-ui, -apple-system, sans-serif;
+
+  // Escala fluida: cresce com a largura da tela sem media query.
+  // clamp(minimo, ideal, maximo) — o minimo protege o mobile, o maximo
+  // evita titulo gigante em monitor grande.
+  --t-display: clamp(2.5rem, 7vw, 4.75rem);
+  --t-titulo: clamp(1.9rem, 4vw, 2.75rem);
+  --t-subtitulo: clamp(1.15rem, 2vw, 1.4rem);
+  --t-corpo: 1.0625rem;
+  --t-pequeno: 0.9375rem;
+  --t-micro: 0.8125rem;
+
+  --peso-normal: 400;
+  --peso-medio: 500;
+  --peso-forte: 600;
+  --peso-display: 700;
+
+  --altura-apertada: 1.1;
+  --altura-titulo: 1.25;
+  --altura-corpo: 1.7;
+
+  // --- Espacamento ---------------------------------------------------------
+  // Escala fechada. Usar so estes valores mantem o ritmo da pagina; valor
+  // solto no meio (13px, 27px) e o que faz layout parecer desalinhado.
+  --e-1: 0.25rem;
+  --e-2: 0.5rem;
+  --e-3: 0.75rem;
+  --e-4: 1rem;
+  --e-5: 1.5rem;
+  --e-6: 2rem;
+  --e-7: 3rem;
+  --e-8: 4rem;
+  --e-9: 6rem;
+
+  // Respiro vertical das secoes: o que mais faz um site parecer profissional
+  --secao-y: clamp(4rem, 10vw, 7.5rem);
+
+  --largura-max: 1140px;
+  --largura-texto: 68ch;   // limite de leitura confortavel
+  --gutter: 1.25rem;       // margem lateral no mobile
+
+  // --- Forma ---------------------------------------------------------------
+  --raio-1: 6px;
+  --raio-2: 12px;
+  --raio-3: 20px;
+  --raio-pilula: 999px;
+
+  --sombra-1: 0 1px 2px rgb(23 23 28 / 6%);
+  --sombra-2: 0 4px 16px rgb(23 23 28 / 8%);
+  --sombra-3: 0 12px 40px rgb(23 23 28 / 12%);
+
+  // --- Movimento -----------------------------------------------------------
+  // Nada acima de 400ms: animacao lenta e lida como travamento.
+  --transicao: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transicao-lenta: 380ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  --altura-header: 72px;
+}

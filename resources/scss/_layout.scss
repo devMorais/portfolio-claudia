@@ -1,0 +1,274 @@
+// ===========================================================================
+// HEADER, MENU MOBILE, FOOTER E BARRA FIXA DE WHATSAPP
+// ===========================================================================
+
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+
+  height: var(--altura-header);
+
+  // No topo o header e transparente; ganha fundo depois de rolar (classe
+  // aplicada pelo JS). Isso deixa o hero respirar.
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: var(--transicao);
+  transition-property: background-color, border-color, backdrop-filter;
+
+  &--rolado {
+    background: rgb(250 249 247 / 88%);
+    backdrop-filter: blur(10px);
+    border-bottom-color: var(--papel-3);
+  }
+}
+
+.header__interno {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.header__marca {
+  font-family: var(--fonte-titulo);
+  font-size: 1.0625rem;
+  font-weight: var(--peso-display);
+  letter-spacing: -0.03em;
+
+  span { color: var(--destaque); }
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--e-5);
+}
+
+.header__link {
+  position: relative;
+  padding-block: var(--e-2);
+  color: var(--tinta-2);
+  font-size: var(--t-pequeno);
+  font-weight: var(--peso-medio);
+  transition: color var(--transicao);
+
+  // Sublinhado que cresce: feito com pseudo-elemento para nao empurrar o layout
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--destaque);
+    transition: width var(--transicao);
+  }
+
+  &:hover {
+    color: var(--tinta);
+
+    &::after { width: 100%; }
+  }
+}
+
+// Botao sanduiche: escondido no desktop
+.header__sanduiche {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+
+  width: 44px;   // area de toque minima
+  height: 44px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--tinta);
+    border-radius: 2px;
+    transition: var(--transicao);
+  }
+}
+
+// Vira X quando o menu esta aberto
+.header__sanduiche[aria-expanded='true'] {
+  span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  span:nth-child(2) { opacity: 0; }
+  span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+@media (max-width: 860px) {
+  .header__sanduiche { display: flex; }
+
+  .header__nav {
+    position: fixed;
+    inset: var(--altura-header) 0 auto 0;
+
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+
+    padding: var(--e-4) var(--gutter) var(--e-6);
+
+    background: var(--papel);
+    border-bottom: 1px solid var(--papel-3);
+    box-shadow: var(--sombra-2);
+
+    // Escondido por padrao no mobile; o JS troca para flex
+    display: none;
+
+    &--aberto { display: flex; }
+  }
+
+  .header__link {
+    padding-block: var(--e-4);
+    border-bottom: 1px solid var(--papel-2);
+    font-size: 1.0625rem;
+
+    &::after { display: none; }
+  }
+}
+
+// Trava a rolagem do body enquanto o menu mobile esta aberto
+body.menu-aberto {
+  overflow: hidden;
+}
+
+// --- Footer ----------------------------------------------------------------
+
+.footer {
+  padding-block: var(--e-8) var(--e-6);
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.footer__grade {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--e-7);
+  padding-bottom: var(--e-6);
+  border-bottom: 1px solid rgb(250 249 247 / 14%);
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+    gap: var(--e-6);
+  }
+}
+
+.footer__marca {
+  font-family: var(--fonte-titulo);
+  font-size: 1.5rem;
+  font-weight: var(--peso-display);
+  letter-spacing: -0.03em;
+}
+
+.footer__texto {
+  max-width: 44ch;
+  margin-top: var(--e-3);
+  color: rgb(250 249 247 / 66%);
+  font-size: var(--t-pequeno);
+}
+
+.footer__titulo {
+  margin-bottom: var(--e-4);
+  font-size: var(--t-micro);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(250 249 247 / 50%);
+}
+
+.footer__lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    color: rgb(250 249 247 / 80%);
+    font-size: var(--t-pequeno);
+    transition: color var(--transicao);
+
+    &:hover { color: var(--papel); }
+  }
+}
+
+.footer__redes {
+  display: flex;
+  gap: var(--e-3);
+  margin-top: var(--e-5);
+}
+
+.footer__rede {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgb(250 249 247 / 20%);
+  border-radius: var(--raio-pilula);
+  transition: var(--transicao);
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  &:hover {
+    background: var(--papel);
+    border-color: var(--papel);
+    color: var(--tinta);
+  }
+}
+
+.footer__rodape {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-3);
+  justify-content: space-between;
+  padding-top: var(--e-5);
+  color: rgb(250 249 247 / 45%);
+  font-size: var(--t-micro);
+}
+
+// --- Botao fixo de WhatsApp no mobile -------------------------------------
+
+.whatsapp-fixo {
+  position: fixed;
+  right: var(--gutter);
+  bottom: var(--gutter);
+  z-index: 90;
+
+  display: none;
+  place-items: center;
+
+  width: 56px;
+  height: 56px;
+  border-radius: var(--raio-pilula);
+
+  // Verde oficial do WhatsApp: excecao proposital a paleta. O usuario
+  // reconhece o botao pela cor, e trocar isso custa clique.
+  background: #25d366;
+  color: #fff;
+  box-shadow: var(--sombra-3);
+
+  svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+  }
+
+  @media (max-width: 860px) {
+    display: grid;
+  }
+}

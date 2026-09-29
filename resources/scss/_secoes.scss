@@ -1,0 +1,663 @@
+// ===========================================================================
+// AS SEIS SECOES DA HOME
+// ===========================================================================
+
+// --- 1. Hero ---------------------------------------------------------------
+
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: 100svh;   // svh e nao vh: no celular, vh conta a barra do navegador
+  padding-top: var(--altura-header);
+  position: relative;
+  overflow: hidden;
+}
+
+// Mancha de cor bem discreta no fundo. Sem isso o hero claro fica chapado.
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, var(--destaque-suave) 0%, transparent 70%);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.hero__grade {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: var(--e-8);
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: var(--e-7);
+    padding-block: var(--e-8);
+  }
+}
+
+.hero__sobretitulo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  margin-bottom: var(--e-4);
+  color: var(--destaque);
+  font-size: var(--t-micro);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  &::before {
+    content: '';
+    width: 32px;
+    height: 2px;
+    background: currentColor;
+  }
+}
+
+.hero__titulo {
+  font-size: var(--t-display);
+  font-weight: var(--peso-display);
+  line-height: var(--altura-apertada);
+  letter-spacing: -0.035em;
+}
+
+.hero__texto {
+  max-width: 52ch;
+  margin-top: var(--e-5);
+  color: var(--tinta-2);
+  font-size: var(--t-subtitulo);
+  line-height: 1.6;
+}
+
+.hero__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-3);
+  margin-top: var(--e-6);
+}
+
+.hero__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-5);
+  margin-top: var(--e-6);
+  color: var(--tinta-3);
+  font-size: var(--t-pequeno);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--e-2);
+    transition: color var(--transicao);
+
+    &:hover { color: var(--destaque); }
+  }
+}
+
+.hero__foto {
+  position: relative;
+  justify-self: center;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--raio-3);
+  overflow: hidden;
+  background: var(--papel-2);
+  box-shadow: var(--sombra-3);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// Placeholder de quando a foto ainda nao foi enviada pelo painel
+.hero__foto--vazia {
+  display: grid;
+  place-items: center;
+  border: 2px dashed var(--papel-3);
+  box-shadow: none;
+  color: var(--tinta-3);
+  font-size: var(--t-pequeno);
+  text-align: center;
+  padding: var(--e-5);
+}
+
+.hero__rolar {
+  position: absolute;
+  left: 50%;
+  bottom: var(--e-5);
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+
+  color: var(--tinta-3);
+  font-size: var(--t-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  &::after {
+    content: '';
+    width: 1px;
+    height: 28px;
+    background: var(--tinta-3);
+    animation: rolar 1.8s ease-in-out infinite;
+  }
+
+  @media (max-width: 900px) { display: none; }
+}
+
+@keyframes rolar {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.4; transform-origin: top; }
+  50% { transform: scaleY(1); opacity: 1; transform-origin: top; }
+}
+
+// --- 2. Minha historia (a migracao de carreira) ---------------------------
+
+.historia__atos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--e-5);
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ato {
+  position: relative;
+  padding: var(--e-6) var(--e-5);
+  background: var(--papel);
+  border: 1px solid var(--papel-3);
+  border-radius: var(--raio-2);
+  transition: var(--transicao);
+  transition-property: transform, box-shadow, border-color;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--destaque);
+    box-shadow: var(--sombra-2);
+  }
+}
+
+.ato__numero {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: var(--e-4);
+  border-radius: var(--raio-pilula);
+  background: var(--destaque-suave);
+  color: var(--destaque-escuro);
+  font-family: var(--fonte-titulo);
+  font-size: var(--t-pequeno);
+  font-weight: var(--peso-display);
+}
+
+.ato__titulo {
+  margin-bottom: var(--e-3);
+  font-size: 1.1875rem;
+}
+
+.ato__texto {
+  color: var(--tinta-2);
+  font-size: var(--t-pequeno);
+}
+
+// Bloco das habilidades trazidas da radiologia — o diferencial dela
+.trazido {
+  margin-top: var(--e-8);
+  padding: var(--e-7) var(--e-6);
+  background: var(--tinta);
+  color: var(--papel);
+  border-radius: var(--raio-3);
+
+  @media (max-width: 600px) {
+    padding: var(--e-6) var(--e-5);
+  }
+}
+
+.trazido__titulo {
+  max-width: 34ch;
+  font-size: var(--t-subtitulo);
+  font-weight: var(--peso-forte);
+}
+
+.trazido__grade {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--e-5);
+  margin-top: var(--e-6);
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trazido__item {
+  padding-left: var(--e-4);
+  border-left: 2px solid var(--destaque);
+}
+
+.trazido__nome {
+  margin-bottom: var(--e-2);
+  font-family: var(--fonte-titulo);
+  font-weight: var(--peso-forte);
+}
+
+.trazido__texto {
+  color: rgb(250 249 247 / 68%);
+  font-size: var(--t-pequeno);
+}
+
+// --- 3. Habilidades tecnicas ---------------------------------------------
+
+.habilidades__grupo + .habilidades__grupo {
+  margin-top: var(--e-7);
+}
+
+.habilidades__categoria {
+  margin-bottom: var(--e-4);
+  color: var(--tinta-3);
+  font-size: var(--t-micro);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.habilidades__grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: var(--e-3);
+}
+
+.habilidade {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  padding: var(--e-4);
+  background: var(--papel);
+  border: 1px solid var(--papel-3);
+  border-radius: var(--raio-2);
+  transition: var(--transicao);
+  transition-property: border-color, box-shadow;
+
+  &:hover {
+    border-color: var(--destaque);
+    box-shadow: var(--sombra-1);
+  }
+}
+
+.habilidade__icone {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--raio-1);
+  background: var(--papel-2);
+
+  img { width: 22px; height: 22px; }
+}
+
+.habilidade__nome {
+  font-family: var(--fonte-titulo);
+  font-size: var(--t-pequeno);
+  font-weight: var(--peso-forte);
+}
+
+// Nivel por rotulo, nao por porcentagem: "Angular 85%" nao significa nada
+// e cria expectativa que a entrevista tecnica vai cobrar.
+.habilidade__nivel {
+  margin-top: 2px;
+  color: var(--tinta-3);
+  font-size: var(--t-micro);
+}
+
+// --- 4. Trajetoria -------------------------------------------------------
+
+.trajetoria__lista {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-6);
+  margin: 0;
+  padding: 0 0 0 var(--e-6);
+  list-style: none;
+
+  // A linha vertical
+  &::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--papel-3);
+  }
+}
+
+.trajetoria__item {
+  position: relative;
+
+  // A bolinha na linha
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--e-6) + 1px);
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: var(--raio-pilula);
+    background: var(--papel);
+    border: 2px solid var(--cor-area, var(--destaque));
+  }
+}
+
+// A cor diz de que area e o item: a migracao fica visivel de relance
+.trajetoria__item--saude { --cor-area: var(--area-saude); }
+.trajetoria__item--tecnologia { --cor-area: var(--area-tecnologia); }
+
+.trajetoria__periodo {
+  display: inline-block;
+  margin-bottom: var(--e-2);
+  color: var(--cor-area, var(--destaque));
+  font-size: var(--t-micro);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.06em;
+}
+
+.trajetoria__titulo {
+  font-size: 1.125rem;
+}
+
+.trajetoria__subtitulo {
+  margin-top: 2px;
+  color: var(--tinta-3);
+  font-size: var(--t-pequeno);
+}
+
+.trajetoria__texto {
+  max-width: var(--largura-texto);
+  margin-top: var(--e-3);
+  color: var(--tinta-2);
+  font-size: var(--t-pequeno);
+}
+
+.formacoes {
+  margin-top: var(--e-8);
+}
+
+.formacoes__grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--e-4);
+  margin-top: var(--e-5);
+}
+
+.formacao {
+  padding: var(--e-5);
+  background: var(--papel);
+  border: 1px solid var(--papel-3);
+  border-radius: var(--raio-2);
+}
+
+.formacao__titulo {
+  font-size: 1rem;
+}
+
+.formacao__meta {
+  margin-top: var(--e-2);
+  color: var(--tinta-3);
+  font-size: var(--t-micro);
+}
+
+// --- 5. Projetos ---------------------------------------------------------
+
+.projetos__grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--e-5);
+}
+
+.projeto {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--papel);
+  border: 1px solid var(--papel-3);
+  border-radius: var(--raio-2);
+  transition: var(--transicao);
+  transition-property: transform, box-shadow;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-3);
+  }
+}
+
+.projeto__imagem {
+  aspect-ratio: 16 / 10;
+  background: var(--papel-2);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.projeto__imagem--vazia {
+  display: grid;
+  place-items: center;
+  color: var(--tinta-3);
+  font-size: var(--t-micro);
+  text-align: center;
+  padding: var(--e-4);
+}
+
+.projeto__corpo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--e-5);
+}
+
+.projeto__papel {
+  margin-bottom: var(--e-3);
+}
+
+.projeto__nome {
+  font-size: 1.1875rem;
+}
+
+.projeto__resumo {
+  margin-top: var(--e-3);
+  color: var(--tinta-2);
+  font-size: var(--t-pequeno);
+}
+
+.projeto__techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+  margin-top: var(--e-4);
+}
+
+.projeto__acoes {
+  display: flex;
+  gap: var(--e-3);
+  margin-top: auto;
+  padding-top: var(--e-5);
+}
+
+.projeto__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  color: var(--destaque);
+  font-size: var(--t-pequeno);
+  font-weight: var(--peso-forte);
+
+  &:hover { text-decoration: underline; }
+}
+
+// --- 6. Contato ----------------------------------------------------------
+// Sem formulario: so os canais que o recrutador ja usa.
+
+.contato__chamada {
+  max-width: 760px;
+  margin-inline: auto;
+  text-align: center;
+
+  .secao__titulo,
+  .secao__subtitulo {
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  .secao__titulo { max-width: 22ch; }
+  .secao__subtitulo { max-width: 52ch; }
+}
+
+.contato__canais {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--e-4);
+  margin-top: var(--e-7);
+  text-align: left;
+}
+
+.contato__canal {
+  display: flex;
+  align-items: center;
+  gap: var(--e-4);
+  padding: var(--e-4) var(--e-5);
+  border: 1px solid var(--papel-3);
+  border-radius: var(--raio-2);
+  background: var(--papel);
+  transition: var(--transicao);
+  transition-property: border-color, transform, box-shadow;
+
+  &:hover {
+    border-color: var(--destaque);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-2);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    fill: var(--destaque);
+  }
+}
+
+.contato__canal-rotulo {
+  display: block;
+  color: var(--tinta-3);
+  font-size: var(--t-micro);
+}
+
+.contato__canal-valor {
+  display: block;
+  font-weight: var(--peso-medio);
+  font-size: var(--t-pequeno);
+  word-break: break-word;   // e-mail longo nao estoura a caixa
+}
+
+.contato__acoes {
+  margin-top: var(--e-7);
+}
+
+// --- Campos de formulario -------------------------------------------------
+// Usados so pela tela de login do painel (o site publico nao tem formulario).
+
+.campo + .campo {
+  margin-top: var(--e-4);
+}
+
+.campo__rotulo {
+  display: block;
+  margin-bottom: var(--e-2);
+  font-size: var(--t-pequeno);
+  font-weight: var(--peso-medio);
+}
+
+.campo__opcional {
+  color: var(--tinta-3);
+  font-weight: var(--peso-normal);
+}
+
+.campo__entrada {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--e-3) var(--e-4);
+
+  border: 1px solid var(--papel-3);
+  border-radius: var(--raio-1);
+  background: var(--papel);
+
+  color: var(--tinta);
+  font-family: var(--fonte-texto);
+  font-size: var(--t-corpo);
+
+  transition: var(--transicao);
+  transition-property: border-color, box-shadow;
+
+  &::placeholder { color: var(--tinta-3); }
+
+  &:focus {
+    outline: none;
+    border-color: var(--destaque);
+    box-shadow: 0 0 0 3px var(--destaque-suave);
+  }
+}
+
+textarea.campo__entrada {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.campo__entrada--erro {
+  border-color: var(--erro);
+
+  &:focus {
+    border-color: var(--erro);
+    box-shadow: 0 0 0 3px var(--erro-suave);
+  }
+}
+
+.campo__erro {
+  margin-top: var(--e-2);
+  color: var(--erro);
+  font-size: var(--t-micro);
+}
+
+.aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-3);
+  margin-bottom: var(--e-5);
+  padding: var(--e-4);
+  border-radius: var(--raio-1);
+  font-size: var(--t-pequeno);
+}
+
+.aviso--sucesso {
+  background: var(--destaque-suave);
+  color: var(--destaque-escuro);
+}
+
+.aviso--erro {
+  background: var(--erro-suave);
+  color: var(--erro);
+}

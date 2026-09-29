@@ -1,0 +1,274 @@
+// ===========================================================================
+// PAINEL ADMINISTRATIVO
+// ===========================================================================
+// O painel nao precisa ser bonito como o site publico: precisa ser rapido e
+// claro. Nao gaste tempo de design aqui.
+
+.login {
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: var(--gutter);
+  background: var(--papel-2);
+}
+
+.login__caixa {
+  width: 100%;
+  max-width: 400px;
+  padding: var(--e-7) var(--e-6);
+  background: var(--papel);
+  border: 1px solid var(--papel-3);
+  border-radius: var(--raio-3);
+  box-shadow: var(--sombra-2);
+}
+
+.login__titulo {
+  font-size: 1.5rem;
+}
+
+.login__texto {
+  margin: var(--e-2) 0 var(--e-6);
+  color: var(--tinta-2);
+  font-size: var(--t-pequeno);
+}
+
+// --- Estrutura do painel --------------------------------------------------
+
+.painel {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100svh;
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.painel__lateral {
+  display: flex;
+  flex-direction: column;
+  padding: var(--e-5) var(--e-4);
+  background: var(--tinta);
+  color: var(--papel);
+
+  @media (max-width: 860px) {
+    // No celular a lateral vira uma faixa no topo, com o menu rolando na horizontal
+    flex-direction: row;
+    align-items: center;
+    gap: var(--e-4);
+    overflow-x: auto;
+    padding: var(--e-3) var(--e-4);
+  }
+}
+
+.painel__marca {
+  margin-bottom: var(--e-6);
+  font-family: var(--fonte-titulo);
+  font-size: 1.125rem;
+  font-weight: var(--peso-display);
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+
+  @media (max-width: 860px) { margin-bottom: 0; }
+}
+
+.painel__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  @media (max-width: 860px) {
+    flex-direction: row;
+    gap: var(--e-2);
+  }
+}
+
+.painel__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-3);
+
+  padding: var(--e-3) var(--e-4);
+  border-radius: var(--raio-1);
+
+  color: rgb(250 249 247 / 70%);
+  font-size: var(--t-pequeno);
+  white-space: nowrap;
+  transition: var(--transicao);
+  transition-property: background-color, color;
+
+  &:hover {
+    background: rgb(250 249 247 / 8%);
+    color: var(--papel);
+  }
+
+  // Item da tela atual
+  &--ativo {
+    background: var(--destaque);
+    color: #fff;
+
+    &:hover { background: var(--destaque); color: #fff; }
+  }
+
+  // Item de tela que ainda nao existe (card em aberto no board)
+  &--pendente {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+.painel__contador {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding-inline: 6px;
+  border-radius: var(--raio-pilula);
+  background: var(--erro);
+  color: #fff;
+  font-size: var(--t-micro);
+  font-weight: var(--peso-forte);
+}
+
+.painel__usuario {
+  margin-top: auto;
+  padding-top: var(--e-5);
+  border-top: 1px solid rgb(250 249 247 / 14%);
+  font-size: var(--t-micro);
+  color: rgb(250 249 247 / 55%);
+
+  @media (max-width: 860px) {
+    margin-top: 0;
+    margin-left: auto;
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+.painel__conteudo {
+  padding: var(--e-6);
+  background: var(--papel-2);
+
+  @media (max-width: 600px) {
+    padding: var(--e-5) var(--e-4);
+  }
+}
+
+.painel__titulo {
+  font-size: 1.625rem;
+}
+
+.painel__subtitulo {
+  margin-top: var(--e-2);
+  margin-bottom: var(--e-6);
+  color: var(--tinta-2);
+  font-size: var(--t-pequeno);
+}
+
+// --- Cartoes de numero ----------------------------------------------------
+
+.numeros {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--e-4);
+}
+
+.numero {
+  padding: var(--e-5);
+  background: var(--papel);
+  border: 1px solid var(--papel-3);
+  border-radius: var(--raio-2);
+}
+
+.numero__valor {
+  font-family: var(--fonte-titulo);
+  font-size: 2.25rem;
+  font-weight: var(--peso-display);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.numero__rotulo {
+  margin-top: var(--e-2);
+  color: var(--tinta-2);
+  font-size: var(--t-pequeno);
+}
+
+// --- Bloco generico do painel --------------------------------------------
+
+.bloco {
+  margin-top: var(--e-6);
+  padding: var(--e-5);
+  background: var(--papel);
+  border: 1px solid var(--papel-3);
+  border-radius: var(--raio-2);
+}
+
+.bloco__titulo {
+  margin-bottom: var(--e-4);
+  font-size: 1.0625rem;
+}
+
+.lista-mensagens {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista-mensagens__item {
+  padding-block: var(--e-4);
+  border-top: 1px solid var(--papel-2);
+
+  &:first-child { border-top: 0; }
+}
+
+.lista-mensagens__topo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2) var(--e-3);
+  align-items: baseline;
+}
+
+.lista-mensagens__nome {
+  font-weight: var(--peso-forte);
+  font-size: var(--t-pequeno);
+}
+
+.lista-mensagens__meta {
+  color: var(--tinta-3);
+  font-size: var(--t-micro);
+}
+
+.lista-mensagens__texto {
+  margin-top: var(--e-2);
+  color: var(--tinta-2);
+  font-size: var(--t-pequeno);
+}
+
+.vazio {
+  padding: var(--e-6) var(--e-4);
+  color: var(--tinta-3);
+  font-size: var(--t-pequeno);
+  text-align: center;
+}
+
+// Caixa que lista o que ainda falta construir. Sai quando o painel terminar.
+.a-fazer {
+  margin-top: var(--e-6);
+  padding: var(--e-5);
+  border: 1px dashed var(--papel-3);
+  border-radius: var(--raio-2);
+  background: var(--papel);
+}
+
+.a-fazer__lista {
+  margin: var(--e-3) 0 0;
+  padding-left: var(--e-5);
+  color: var(--tinta-2);
+  font-size: var(--t-pequeno);
+
+  li + li { margin-top: var(--e-2); }
+}

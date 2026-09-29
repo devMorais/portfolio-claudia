@@ -1,0 +1,243 @@
+// ===========================================================================
+// BASE — reset, tipografia, utilitarios de layout e botoes
+// ===========================================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;   // sem isto, width:100% + padding estoura a caixa
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--fonte-texto);
+  font-size: var(--t-corpo);
+  line-height: var(--altura-corpo);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;   // rede de seguranca contra rolagem horizontal
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-weight: var(--peso-forte);
+  line-height: var(--altura-titulo);
+  letter-spacing: -0.02em;
+}
+
+p { margin: 0; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img, svg, video {
+  display: block;
+  max-width: 100%;   // imagem nunca estoura o container
+  height: auto;
+}
+
+// Tamanho e cor padrao dos icones SVG inline (os componentes <x-icone-*>).
+// Sem isto o SVG assume o tamanho intrinseco dele e some ou estoura.
+// Quem precisa de outro tamanho sobrescreve no proprio bloco.
+svg {
+  width: 1.1em;
+  height: 1.1em;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+// Foco visivel. Nunca remova isto: quem navega por teclado fica perdido sem.
+:focus-visible {
+  outline: 2px solid var(--destaque);
+  outline-offset: 3px;
+  border-radius: var(--raio-1);
+}
+
+// Respeita quem pediu menos animacao no sistema operacional.
+// Nao e detalhe de acessibilidade: tem gente que passa mal com movimento.
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// --- Layout ----------------------------------------------------------------
+
+.container {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.secao {
+  padding-block: var(--secao-y);
+
+  // Sem isto, rolar ate a ancora esconde o titulo atras do header fixo
+  scroll-margin-top: var(--altura-header);
+}
+
+.secao--banda {
+  background: var(--papel-2);
+}
+
+.secao__rotulo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  margin-bottom: var(--e-4);
+  color: var(--destaque);
+  font-size: var(--t-micro);
+  font-weight: var(--peso-forte);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  &::before {
+    content: '';
+    width: 28px;
+    height: 2px;
+    background: currentColor;
+  }
+}
+
+.secao__titulo {
+  max-width: 24ch;
+  font-size: var(--t-titulo);
+}
+
+.secao__subtitulo {
+  max-width: var(--largura-texto);
+  margin-top: var(--e-4);
+  color: var(--tinta-2);
+  font-size: var(--t-subtitulo);
+  line-height: 1.5;
+}
+
+.secao__cabecalho {
+  margin-bottom: var(--e-8);
+}
+
+// --- Botoes ----------------------------------------------------------------
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-2);
+
+  // 48px de altura: area de toque confortavel no celular
+  min-height: 48px;
+  padding: var(--e-3) var(--e-5);
+
+  border: 1px solid transparent;
+  border-radius: var(--raio-pilula);
+  background: transparent;   // sem isto, <button> ganha fundo cinza do navegador
+
+  color: inherit;
+  font-family: var(--fonte-texto);
+  font-size: var(--t-pequeno);
+  font-weight: var(--peso-forte);
+  text-align: center;
+
+  cursor: pointer;
+  transition: var(--transicao);
+  transition-property: background-color, border-color, color, transform, box-shadow;
+
+  &:hover { transform: translateY(-1px); }
+  &:active { transform: translateY(0); }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.btn--principal {
+  background: var(--tinta);
+  color: var(--papel);
+
+  &:hover { background: var(--destaque-escuro); }
+}
+
+.btn--contorno {
+  border-color: var(--papel-3);
+  color: var(--tinta);
+
+  &:hover {
+    border-color: var(--tinta);
+    background: rgb(23 23 28 / 4%);
+  }
+}
+
+.btn--destaque {
+  background: var(--destaque);
+  color: #fff;
+
+  &:hover { background: var(--destaque-escuro); }
+}
+
+.btn--bloco {
+  width: 100%;
+}
+
+// --- Pecas pequenas reaproveitadas ----------------------------------------
+
+.etiqueta {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--raio-pilula);
+  background: var(--papel-2);
+  color: var(--tinta-2);
+  font-size: var(--t-micro);
+  font-weight: var(--peso-medio);
+  white-space: nowrap;
+}
+
+.etiqueta--destaque {
+  background: var(--destaque-suave);
+  color: var(--destaque-escuro);
+}
+
+// Some visualmente mas continua sendo lido por leitor de tela
+.apenas-leitor {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+// --- Animacao de entrada ao rolar -----------------------------------------
+// O elemento comeca visivel e a classe .revelar SO e aplicada pelo JS, depois
+// que ele confirma que o IntersectionObserver existe. Assim, se o JS falhar,
+// o conteudo aparece normalmente em vez de ficar invisivel para sempre.
+
+.revelar {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--transicao-lenta), transform var(--transicao-lenta);
+}
+
+.revelar--visivel {
+  opacity: 1;
+  transform: none;
+}

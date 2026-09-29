@@ -1,0 +1,11 @@
+// ===========================================================================
+// PORTFOLIO CLAUDIA — folha de estilo principal
+// ===========================================================================
+// Ordem importa: tokens primeiro (todos os outros usam as variaveis dele),
+// base depois (reset e utilitarios), e por fim os blocos de tela.
+
+@use 'tokens';
+@use 'base';
+@use 'layout';
+@use 'secoes';
+@use 'admin';
