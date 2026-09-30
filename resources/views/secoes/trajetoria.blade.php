@@ -12,7 +12,7 @@
 <section class="secao {{ $banda ? 'secao--banda' : '' }}" id="trajetoria">
     <div class="container">
         <div class="secao__cabecalho" data-revelar>
-            <span class="secao__rotulo">Trajetoria</span>
+            <span class="secao__rotulo">Trajetória</span>
             <h2 class="secao__titulo">O caminho que eu percorri</h2>
         </div>
 
@@ -37,7 +37,7 @@
 
         @if ($formacoes->isNotEmpty())
             <div class="formacoes" data-revelar>
-                <h3 class="habilidades__categoria">Formacao e certificados</h3>
+                <h3 class="habilidades__categoria">Formação e certificados</h3>
 
                 <div class="formacoes__grade">
                     @foreach ($formacoes as $formacao)
