@@ -258,8 +258,8 @@ body.menu-aberto {
 
   // Verde oficial do WhatsApp: excecao proposital a paleta. O usuario
   // reconhece o botao pela cor, e trocar isso custa clique.
-  background: #25d366;
-  color: #fff;
+  background: var(--whatsapp);
+  color: var(--branco);
   box-shadow: var(--sombra-3);
 
   svg {

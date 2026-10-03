@@ -9,7 +9,7 @@
 <section class="secao {{ $banda ? 'secao--banda' : '' }}" id="sobre">
     <div class="container">
         <div class="secao__cabecalho" data-revelar>
-            <span class="secao__rotulo">Minha historia</span>
+            <span class="secao__rotulo">Minha história</span>
             <h2 class="secao__titulo">{{ $sobre?->titulo }}</h2>
 
             @if ($sobre?->subtitulo)
@@ -37,7 +37,7 @@
         @if ($habilidadesHumanas->isNotEmpty())
             <div class="trazido" data-revelar>
                 <h3 class="trazido__titulo">
-                    O que a radiologia me ensinou e eu uso todo dia escrevendo codigo
+                    O que a radiologia me ensinou e eu uso todo dia escrevendo código
                 </h3>
 
                 <div class="trazido__grade">

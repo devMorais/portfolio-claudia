@@ -18,7 +18,7 @@
   --papel-3: #e6e2db;   // bordas e linhas
   --tinta: #17171c;
   --tinta-2: #5c5c68;   // texto secundario
-  --tinta-3: #8b8b96;   // legenda, metadado
+  --tinta-3: #666672;   // legenda, metadado (AA: 5,38 no papel, 4,93 na faixa)
 
   // Um unico destaque. Verde profundo: sobrio, nada de azul de template.
   --destaque: #1f6f63;
@@ -32,6 +32,10 @@
   --erro: #b3261e;
   --erro-suave: #fdeceb;
   --sucesso: #1f6f63;
+
+  // Cores fixas usadas por componentes (antes escritas na mao nos arquivos)
+  --branco: #fff;       // texto sobre botao escuro ou verde
+  --whatsapp: #25d366;  // verde da marca WhatsApp (botao flutuante)
 
   // --- Tipografia ----------------------------------------------------------
   --fonte-titulo: 'Sora', system-ui, sans-serif;

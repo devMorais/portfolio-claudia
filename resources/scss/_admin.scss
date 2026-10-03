@@ -106,9 +106,9 @@
   // Item da tela atual
   &--ativo {
     background: var(--destaque);
-    color: #fff;
+    color: var(--branco);
 
-    &:hover { background: var(--destaque); color: #fff; }
+    &:hover { background: var(--destaque); color: var(--branco); }
   }
 
   // Item de tela que ainda nao existe (card em aberto no board)
@@ -126,7 +126,7 @@
   padding-inline: 6px;
   border-radius: var(--raio-pilula);
   background: var(--erro);
-  color: #fff;
+  color: var(--branco);
   font-size: var(--t-micro);
   font-weight: var(--peso-forte);
 }

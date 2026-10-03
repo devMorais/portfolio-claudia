@@ -63,10 +63,10 @@ class PortfolioSeeder extends Seeder
     private function secoes(): void
     {
         $secoes = [
-            ['slug' => 'hero',        'nome' => 'Apresentacao',   'titulo_menu' => 'Inicio',         'visivel' => true],
-            ['slug' => 'sobre',       'nome' => 'Minha historia', 'titulo_menu' => 'Minha historia', 'visivel' => true],
+            ['slug' => 'hero',        'nome' => 'Apresentacao',   'titulo_menu' => 'Início',         'visivel' => true],
+            ['slug' => 'sobre',       'nome' => 'Minha historia', 'titulo_menu' => 'Minha história', 'visivel' => true],
             ['slug' => 'habilidades', 'nome' => 'Habilidades',    'titulo_menu' => 'Habilidades',    'visivel' => true],
-            ['slug' => 'trajetoria',  'nome' => 'Trajetoria',     'titulo_menu' => 'Trajetoria',     'visivel' => true],
+            ['slug' => 'trajetoria',  'nome' => 'Trajetoria',     'titulo_menu' => 'Trajetória',     'visivel' => true],
             ['slug' => 'projetos',    'nome' => 'Projetos',       'titulo_menu' => 'Projetos',       'visivel' => true],
             ['slug' => 'contato',     'nome' => 'Contato',        'titulo_menu' => 'Contato',        'visivel' => true],
         ];
