@@ -25,9 +25,7 @@
             <div class="numero__valor">{{ $totalSecoesVisiveis }}</div>
             <div class="numero__rotulo">Secoes ligadas no site</div>
         </div>
-
     </div>
-
 
     {{-- Esta caixa sai do painel quando as telas de edicao estiverem prontas. --}}
     <div class="a-fazer">
@@ -38,7 +36,6 @@
         </p>
 
         <ul class="a-fazer__lista">
-            <li><strong>PC-14</strong> — Textos: editar hero e os 3 atos da minha historia</li>
             <li><strong>PC-15</strong> — Habilidades e trajetoria: criar, editar, remover e reordenar</li>
             <li><strong>PC-16</strong> — Projetos: CRUD com envio de captura de tela</li>
             <li><strong>PC-17</strong> — Configuracoes: redes, curriculo, SEO e liga/desliga de secoes</li>

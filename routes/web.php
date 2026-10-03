@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AutenticacaoController;
 use App\Http\Controllers\Admin\PainelController;
+use App\Http\Controllers\Admin\TextosController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/logout', [AutenticacaoController::class, 'sair'])->name('logout');
         Route::get('/', [PainelController::class, 'index'])->name('painel');
 
+        // Textos: Apresentacao (hero) e Minha historia (sobre)
+        Route::get('/textos', [TextosController::class, 'edit'])->name('textos.edit');
+        Route::put('/textos', [TextosController::class, 'update'])->name('textos.update');
+
         /*
          * ------------------------------------------------------------------
          * A FAZER (cards PC-13 a PC-17 no board do Avante):
@@ -49,7 +54,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
          *   Route::resource('habilidades', HabilidadeController::class);
          *   Route::resource('trajetorias', TrajetoriaController::class);
          *   Route::resource('formacoes', FormacaoController::class);
-         *   Route::get('/textos', ...)   // hero e minha historia
          *   Route::get('/configuracoes', ...) // redes, SEO, curriculo, secoes
          * ------------------------------------------------------------------
          */

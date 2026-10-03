@@ -27,13 +27,19 @@
                 Inicio
             </a>
 
+            <a href="{{ route('admin.textos.edit') }}"
+               class="painel__item {{ request()->routeIs('admin.textos.*') ? 'painel__item--ativo' : '' }}">
+                Textos
+            </a>
+
             {{--
-                As telas abaixo ainda nao existem: sao as cards PC-13 a PC-17
+                As telas abaixo ainda nao existem: sao as cards PC-15 a PC-17
                 no board do Avante. Ficam visiveis e apagadas de proposito,
                 para o menu ja mostrar o desenho final do painel e a Claudia
                 saber exatamente o que falta construir.
+                Quando uma tela ficar pronta, troque o <span> por um <a>,
+                no mesmo modelo do item Textos acima.
             --}}
-            <span class="painel__item painel__item--pendente" title="Card PC-14">Textos</span>
             <span class="painel__item painel__item--pendente" title="Card PC-15">Habilidades</span>
             <span class="painel__item painel__item--pendente" title="Card PC-15">Trajetoria</span>
             <span class="painel__item painel__item--pendente" title="Card PC-16">Projetos</span>
