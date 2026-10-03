@@ -272,3 +272,107 @@
 
   li + li { margin-top: var(--e-2); }
 }
+
+// --- Formularios de edicao (padrao para todas as telas do painel) ---------
+
+.aviso {
+  margin-bottom: var(--e-5);
+  padding: var(--e-4) var(--e-5);
+  border: 1px solid;
+  border-radius: var(--raio-2);
+  font-size: var(--t-pequeno);
+
+  &--sucesso {
+    border-color: var(--destaque);
+    background: color-mix(in srgb, var(--destaque) 10%, var(--papel));
+  }
+
+  &--erro {
+    border-color: var(--erro);
+    background: color-mix(in srgb, var(--erro) 8%, var(--papel));
+    color: var(--erro);
+  }
+}
+
+.campo {
+  margin-bottom: var(--e-5);
+
+  &:last-child { margin-bottom: 0; }
+
+  &--erro .campo__entrada { border-color: var(--erro); }
+}
+
+.campo__rotulo {
+  display: block;
+  margin-bottom: var(--e-2);
+  font-size: var(--t-pequeno);
+  font-weight: var(--peso-forte);
+}
+
+.campo__dica {
+  margin: calc(var(--e-2) * -1) 0 var(--e-2);
+  color: var(--tinta-3);
+  font-size: var(--t-micro);
+}
+
+.campo__entrada {
+  width: 100%;
+  padding: var(--e-3) var(--e-4);
+  border: 1px solid var(--papel-3);
+  border-radius: var(--raio-1);
+  background: var(--branco);
+  color: var(--tinta);
+  font: inherit;
+  font-size: var(--t-pequeno);
+  line-height: 1.5;
+
+  &:focus-visible {
+    outline: 2px solid var(--destaque);
+    outline-offset: 1px;
+  }
+}
+
+textarea.campo__entrada { resize: vertical; }
+
+.campo__rodape {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--e-3);
+  margin-top: var(--e-2);
+  font-size: var(--t-micro);
+}
+
+.campo__erro { color: var(--erro); }
+
+.campo__contador {
+  margin-left: auto;
+  color: var(--tinta-3);
+  white-space: nowrap;
+}
+
+.ato-edicao {
+  margin: var(--e-5) 0 0;
+  padding: var(--e-4) var(--e-5);
+  border: 1px solid var(--papel-3);
+  border-radius: var(--raio-2);
+}
+
+.ato-edicao__legenda {
+  padding-inline: var(--e-2);
+  font-size: var(--t-pequeno);
+  font-weight: var(--peso-forte);
+}
+
+.painel__acoes { margin-top: var(--e-6); }
+
+.painel__botao {
+  padding: var(--e-3) var(--e-6);
+  border: 0;
+  border-radius: var(--raio-1);
+  background: var(--destaque);
+  color: var(--branco);
+  font: inherit;
+  font-size: var(--t-pequeno);
+  font-weight: var(--peso-forte);
+  cursor: pointer;
+}
