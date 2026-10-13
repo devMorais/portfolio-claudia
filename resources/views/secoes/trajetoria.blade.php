@@ -42,7 +42,14 @@
                 <div class="formacoes__grade">
                     @foreach ($formacoes as $formacao)
                         <div class="formacao">
-                            <h4 class="formacao__titulo">{{ $formacao->titulo }}</h4>
+                            <h4 class="formacao__titulo">
+                                @if ($formacao->certificado_url)
+                                    <a href="{{ $formacao->certificado_url }}" target="_blank" rel="noopener"
+                                       style="color: inherit; text-decoration: underline;">Ver certificado: {{ $formacao->titulo }}</a>
+                                @else
+                                    {{ $formacao->titulo }}
+                                @endif
+                            </h4>
 
                             <div class="formacao__meta">
                                 {{ collect([
