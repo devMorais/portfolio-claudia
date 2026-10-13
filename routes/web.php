@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AutenticacaoController;
 use App\Http\Controllers\Admin\ConfiguracaoController;
+use App\Http\Controllers\Admin\FormacaoController;
 use App\Http\Controllers\Admin\HabilidadeController;
 use App\Http\Controllers\Admin\PainelController;
 use App\Http\Controllers\Admin\ProjetoController;
@@ -78,6 +79,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/trajetorias/{trajetoria}/descer', [TrajetoriaController::class, 'descer'])
             ->whereNumber('trajetoria')->name('trajetorias.descer');
 
+        // Formacoes: cursos e certificados
+        Route::get('/formacoes', [FormacaoController::class, 'index'])->name('formacoes.index');
+        Route::get('/formacoes/nova', [FormacaoController::class, 'create'])->name('formacoes.create');
+        Route::post('/formacoes', [FormacaoController::class, 'store'])->name('formacoes.store');
+        Route::get('/formacoes/{formacao}/editar', [FormacaoController::class, 'edit'])
+            ->whereNumber('formacao')->name('formacoes.edit');
+        Route::put('/formacoes/{formacao}', [FormacaoController::class, 'update'])
+            ->whereNumber('formacao')->name('formacoes.update');
+        Route::delete('/formacoes/{formacao}', [FormacaoController::class, 'destroy'])
+            ->whereNumber('formacao')->name('formacoes.destroy');
+        Route::post('/formacoes/{formacao}/subir', [FormacaoController::class, 'subir'])
+            ->whereNumber('formacao')->name('formacoes.subir');
+        Route::post('/formacoes/{formacao}/descer', [FormacaoController::class, 'descer'])
+            ->whereNumber('formacao')->name('formacoes.descer');
+
         // Projetos: cartoes com captura de tela
         Route::get('/projetos', [ProjetoController::class, 'index'])->name('projetos.index');
         Route::get('/projetos/novo', [ProjetoController::class, 'create'])->name('projetos.create');
@@ -96,9 +112,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Configuracoes: dados gerais, redes, SEO e secoes liga/desliga
         Route::get('/configuracoes', [ConfiguracaoController::class, 'edit'])->name('configuracoes.edit');
         Route::put('/configuracoes', [ConfiguracaoController::class, 'update'])->name('configuracoes.update');
-
-        /*
-         * A FAZER: tela de Formacoes (tabela formacoes), se a card pedir.
-         */
     });
 });

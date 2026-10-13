@@ -42,6 +42,11 @@
                 Trajetoria
             </a>
 
+            <a href="{{ route('admin.formacoes.index') }}"
+               class="painel__item {{ request()->routeIs('admin.formacoes.*') ? 'painel__item--ativo' : '' }}">
+                Formacoes
+            </a>
+
             <a href="{{ route('admin.projetos.index') }}"
                class="painel__item {{ request()->routeIs('admin.projetos.*') ? 'painel__item--ativo' : '' }}">
                 Projetos
