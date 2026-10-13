@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AutenticacaoController;
+use App\Http\Controllers\Admin\ConfiguracaoController;
 use App\Http\Controllers\Admin\HabilidadeController;
 use App\Http\Controllers\Admin\PainelController;
 use App\Http\Controllers\Admin\ProjetoController;
@@ -92,14 +93,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/projetos/{projeto}/descer', [ProjetoController::class, 'descer'])
             ->whereNumber('projeto')->name('projetos.descer');
 
+        // Configuracoes: dados gerais, redes, SEO e secoes liga/desliga
+        Route::get('/configuracoes', [ConfiguracaoController::class, 'edit'])->name('configuracoes.edit');
+        Route::put('/configuracoes', [ConfiguracaoController::class, 'update'])->name('configuracoes.update');
+
         /*
-         * ------------------------------------------------------------------
-         * A FAZER (card PC-17 no board do Avante):
-         * a ultima tela de edicao do painel.
-         *
-         *   Route::resource('formacoes', FormacaoController::class);
-         *   Route::get('/configuracoes', ...) // redes, SEO, curriculo, secoes
-         * ------------------------------------------------------------------
+         * A FAZER: tela de Formacoes (tabela formacoes), se a card pedir.
          */
     });
 });
