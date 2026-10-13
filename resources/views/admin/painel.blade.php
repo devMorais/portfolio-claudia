@@ -26,17 +26,4 @@
             <div class="numero__rotulo">Secoes ligadas no site</div>
         </div>
     </div>
-
-    {{-- Esta caixa sai do painel quando as telas de edicao estiverem prontas. --}}
-    <div class="a-fazer">
-        <h2 class="bloco__titulo">O que falta construir aqui</h2>
-        <p class="painel__subtitulo" style="margin-bottom: 0;">
-            A estrutura do painel (login, layout, menu, esta tela) esta pronta.
-            Cada item abaixo e uma card no board Portfolio Claudia, no Avante.
-        </p>
-
-        <ul class="a-fazer__lista">
-            <li><strong>PC-17</strong> — Configuracoes: redes, curriculo, SEO e liga/desliga de secoes</li>
-        </ul>
-    </div>
 @endsection

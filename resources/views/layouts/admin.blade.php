@@ -47,14 +47,10 @@
                 Projetos
             </a>
 
-            {{--
-                A tela abaixo ainda nao existe: e a card PC-17 no board do
-                Avante. Fica visivel e apagada de proposito, para o menu ja
-                mostrar o desenho final do painel e a Claudia saber o que falta.
-                Quando ficar pronta, troque o <span> por um <a>, no mesmo
-                modelo dos itens acima.
-            --}}
-            <span class="painel__item painel__item--pendente" title="Card PC-17">Configuracoes</span>
+            <a href="{{ route('admin.configuracoes.edit') }}"
+               class="painel__item {{ request()->routeIs('admin.configuracoes.*') ? 'painel__item--ativo' : '' }}">
+                Configuracoes
+            </a>
         </nav>
 
         <div class="painel__usuario">
