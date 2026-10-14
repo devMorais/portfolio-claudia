@@ -231,15 +231,22 @@ php artisan route:cache
 php artisan view:cache
 ```
 
-Se o conteúdo do seeder mudou e você quer refletir no ar:
+**Não rode `php artisan db:seed` depois do primeiro deploy.** O seeder
+sobrescreve o que a Claudia editou pelo painel: textos, redes, cidade, nome
+das seções, quais estão ligadas e as habilidades, trajetória e formações com
+o mesmo nome. O conteúdo agora é atualizado só pelo painel.
 
-```bash
-php artisan db:seed --force
-```
+---
 
-É `updateOrCreate`: não duplica. Mas **sobrescreve** o que tiver sido editado
-pelo painel. Depois que as telas de edição existirem (cards PC-04 a PC-08), o
-seeder deixa de ser a forma de atualizar conteúdo.
+## Imagens enviadas pelo painel
+
+- Ficam em `claudia_app/storage/app/public/projetos`. Essa pasta não está
+  no Git, então o `git pull` nunca as apaga. Não apague a pasta `storage`.
+- O painel aceita JPG, PNG e WEBP até 2 MB. Se o PHP do servidor aceitar
+  menos que isso, o envio falha lá mesmo funcionando no computador local.
+  Confira no hPanel (PHP, Opções do PHP) os valores `upload_max_filesize` e
+  `post_max_size`. Os dois precisam ser de pelo menos 2M.
+- Se a imagem salva mas não abre, falta o `php artisan storage:link` (passo 9).
 
 ---
 
@@ -247,5 +254,4 @@ seeder deixa de ser a forma de atualizar conteúdo.
 
 - O `.env` de produção **nunca** entra no Git
 - Credenciais de produção ficam fora do repositório (padrão da casa:
-  `DEPLOY.private.md`, não versionado)
-- Só o Fernando mexe em produção
+  `DEPLOY.private.md`,
