@@ -3,6 +3,12 @@
 @section('titulo', $projeto->exists ? 'Editar projeto' : 'Novo projeto')
 
 @section('conteudo')
+    @php
+        $destaqueMarcado = $errors->any()
+            ? old('destaque') !== null
+            : (bool) $projeto->destaque;
+    @endphp
+
     <h1 class="painel__titulo">{{ $projeto->exists ? 'Editar projeto' : 'Novo projeto' }}</h1>
     <p class="painel__subtitulo">
         <a href="{{ route('admin.projetos.index') }}">&larr; Voltar para a lista</a>
@@ -32,7 +38,14 @@
                 'nome' => 'resumo', 'rotulo' => 'Resumo',
                 'modo' => 'area', 'linhas' => 3,
                 'valor' => $projeto->resumo, 'limite' => $limites['resumo'],
-                'dica' => 'Uma ou duas frases sobre o que o projeto faz.',
+                'dica' => 'Uma ou duas frases sobre o que o projeto faz. É o texto que aparece no cartão do site.',
+            ])
+
+            @include('admin._campo-simples', [
+                'nome' => 'descricao', 'rotulo' => 'Descrição',
+                'modo' => 'area', 'linhas' => 5,
+                'valor' => $projeto->descricao, 'limite' => $limites['descricao'],
+                'dica' => 'Texto mais longo. Ainda não aparece no site.',
             ])
 
             @include('admin._campo-simples', [
@@ -59,11 +72,20 @@
                 'dica' => 'Opcional. Se preencher, aparece o link "Ver no ar".',
             ])
 
+            <div class="campo">
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9375rem; font-weight: 500;">
+                    <input type="checkbox" name="destaque" value="1" @checked($destaqueMarcado)>
+                    Projeto em destaque
+                </label>
+                <p class="campo__dica">Marca o projeto como principal. Ainda não muda nada no site.</p>
+            </div>
+
             <div class="campo {{ $errors->has('imagem') ? 'campo--erro' : '' }}">
                 <label class="campo__rotulo" for="campo_imagem">Captura de tela</label>
-                <p class="campo__dica">JPG, PNG ou WEBP, até 2 MB. Proporção 16:10 (ex.: 1280x800) fica melhor no site.</p>
+                <p class="campo__dica">JPG, PNG ou WEBP, até 4 MB. Proporção 16:10 (ex.: 1280x800) fica melhor no site.</p>
 
                 @if ($projeto->imagem_url)
+                    <p class="campo__dica" style="margin-bottom: 4px;">Imagem atual:</p>
                     <img src="{{ $projeto->imagem_url }}" alt="Imagem atual do projeto"
                          style="display: block; width: 100%; max-width: 240px; margin-bottom: 12px; border-radius: 8px;">
 
@@ -73,8 +95,15 @@
                     </label>
                 @endif
 
+                <div id="previa-bloco" hidden>
+                    <p class="campo__dica" style="margin-bottom: 4px;">Nova imagem (ainda não salva):</p>
+                    <img id="previa" alt="Pré-visualização da imagem escolhida"
+                         style="display: block; width: 100%; max-width: 240px; margin-bottom: 12px; border-radius: 8px;">
+                </div>
+
                 <input type="file" id="campo_imagem" name="imagem" class="campo__entrada"
                        accept="image/jpeg,image/png,image/webp"
+                       data-max-bytes="{{ \App\Http\Requests\ProjetoRequest::IMAGEM_MAX_KB * 1024 }}"
                        @if ($errors->has('imagem')) aria-invalid="true" @endif
                        aria-describedby="campo_imagem-erro">
 
@@ -101,5 +130,49 @@
                 alvo.textContent = campo.value.length + '/' + limite;
             });
         });
+
+        (function () {
+            var entrada = document.getElementById('campo_imagem');
+            var erro = document.getElementById('campo_imagem-erro');
+            var bloco = document.getElementById('previa-bloco');
+            var previa = document.getElementById('previa');
+            var tipos = ['image/jpeg', 'image/png', 'image/webp'];
+            var maxBytes = parseInt(entrada.dataset.maxBytes, 10);
+            var enderecoAtual = null;
+
+            function limpar() {
+                if (enderecoAtual) URL.revokeObjectURL(enderecoAtual);
+                enderecoAtual = null;
+                previa.removeAttribute('src');
+                bloco.hidden = true;
+            }
+
+            entrada.addEventListener('change', function () {
+                limpar();
+                erro.textContent = '';
+                entrada.removeAttribute('aria-invalid');
+
+                var arquivo = entrada.files[0];
+                if (!arquivo) return;
+
+                var problema = '';
+                if (tipos.indexOf(arquivo.type) === -1) {
+                    problema = 'A imagem precisa ser JPG, PNG ou WEBP.';
+                } else if (arquivo.size > maxBytes) {
+                    problema = 'A imagem passou de 4 MB.';
+                }
+
+                if (problema) {
+                    erro.textContent = problema;
+                    entrada.setAttribute('aria-invalid', 'true');
+                    entrada.value = '';
+                    return;
+                }
+
+                enderecoAtual = URL.createObjectURL(arquivo);
+                previa.src = enderecoAtual;
+                bloco.hidden = false;
+            });
+        })();
     </script>
 @endsection
