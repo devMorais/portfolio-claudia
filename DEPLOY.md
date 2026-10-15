@@ -242,10 +242,11 @@ o mesmo nome. O conteúdo agora é atualizado só pelo painel.
 
 - Ficam em `claudia_app/storage/app/public/projetos`. Essa pasta não está
   no Git, então o `git pull` nunca as apaga. Não apague a pasta `storage`.
-- O painel aceita JPG, PNG e WEBP até 2 MB. Se o PHP do servidor aceitar
+- O painel aceita JPG, PNG e WEBP até 4 MB. Se o PHP do servidor aceitar
   menos que isso, o envio falha lá mesmo funcionando no computador local.
   Confira no hPanel (PHP, Opções do PHP) os valores `upload_max_filesize` e
-  `post_max_size`. Os dois precisam ser de pelo menos 2M.
+  `post_max_size`. `upload_max_filesize` precisa ser de pelo menos 4M e
+  `post_max_size` de pelo menos 8M.
 - Se a imagem salva mas não abre, falta o `php artisan storage:link` (passo 9).
 
 ---
@@ -254,4 +255,5 @@ o mesmo nome. O conteúdo agora é atualizado só pelo painel.
 
 - O `.env` de produção **nunca** entra no Git
 - Credenciais de produção ficam fora do repositório (padrão da casa:
-  `DEPLOY.private.md`,
+  `DEPLOY.private.md`, não versionado)
+- Só o Fernando mexe em produção
