@@ -118,13 +118,22 @@ class ProjetosTest extends TestCase
         $this->assertDatabaseCount('projetos', 0);
     }
 
-    public function test_imagem_maior_que_2mb_e_recusada(): void
+    public function test_imagem_maior_que_4mb_e_recusada(): void
     {
         $this->post(route('admin.projetos.store'), $this->dados([
-            'imagem' => UploadedFile::fake()->image('grande.jpg')->size(2500),
+            'imagem' => UploadedFile::fake()->image('grande.jpg')->size(4500),
         ]))->assertSessionHasErrors('imagem');
 
         $this->assertDatabaseCount('projetos', 0);
+    }
+
+    public function test_imagem_de_3mb_e_aceita(): void
+    {
+        $this->post(route('admin.projetos.store'), $this->dados([
+            'imagem' => UploadedFile::fake()->image('media.jpg')->size(3000),
+        ]))->assertSessionHasNoErrors();
+
+        $this->assertDatabaseCount('projetos', 1);
     }
 
     public function test_formulario_de_editar_vem_preenchido(): void
@@ -234,5 +243,38 @@ class ProjetosTest extends TestCase
 
         $this->assertSame(['B', 'A'], $this->nomes());
         $this->assertSame([1, 2], Projeto::orderBy('ordem')->pluck('ordem')->all());
+    }
+
+    public function test_salva_descricao_e_destaque(): void
+    {
+        $this->post(route('admin.projetos.store'), $this->dados([
+            'descricao' => 'Descrição longa do projeto.',
+            'destaque' => '1',
+        ]))->assertRedirect();
+
+        $this->assertDatabaseHas('projetos', [
+            'nome' => 'Novo projeto',
+            'descricao' => 'Descrição longa do projeto.',
+            'destaque' => true,
+        ]);
+    }
+
+    public function test_destaque_desmarcado_vira_falso_ao_editar(): void
+    {
+        $projeto = Projeto::create(['nome' => 'P', 'ordem' => 1, 'destaque' => true]);
+
+        $this->put(route('admin.projetos.update', $projeto), $this->dados())
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('projetos', ['id' => $projeto->id, 'destaque' => false]);
+    }
+
+    public function test_formulario_tem_previa_e_limite_de_4mb(): void
+    {
+        $this->get(route('admin.projetos.create'))
+            ->assertOk()
+            ->assertSee('id="previa"', false)
+            ->assertSee('data-max-bytes="4194304"', false)
+            ->assertSee('Projeto em destaque');
     }
 }
